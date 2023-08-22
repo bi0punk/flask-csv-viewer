@@ -2,38 +2,44 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <!-- Agrega el enlace al archivo de estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <table id="dynamicTable" class="display">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>25</td>
-                <td>New York</td>
-            </tr>
-            <tr>
-                <td>Jane Smith</td>
-                <td>30</td>
-                <td>Los Angeles</td>
-            </tr>
-            <tr>
-                <td>Mike Johnson</td>
-                <td>22</td>
-                <td>Chicago</td>
-            </tr>
-            <!-- Agrega más filas según sea necesario -->
-        </tbody>
-    </table>
+    <div class="container">
+        <table id="dynamicTable" class="table display">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>25</td>
+                    <td>New York</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>30</td>
+                    <td>Los Angeles</td>
+                </tr>
+                <tr>
+                    <td>Mike Johnson</td>
+                    <td>22</td>
+                    <td>Chicago</td>
+                </tr>
+                <!-- Agrega más filas según sea necesario -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <!-- Agrega el enlace al archivo de scripts de Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#dynamicTable').DataTable();
