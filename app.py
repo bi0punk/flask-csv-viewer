@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -25,4 +26,4 @@ def index():
     return render_template('index.html', data=None, selected_file_name=selected_file_name)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
