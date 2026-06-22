@@ -11,7 +11,7 @@
         <div class="alert alert-info">Archivo: {{ selected_file_name }}</div>
         {% endif %}
         {% if data %}
-        {{ data }}
+        {{ data|safe }}
         {% else %}
         <p class="text-muted">Sube un archivo CSV para visualizar los datos.</p>
         {% endif %}
