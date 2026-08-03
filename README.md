@@ -4,7 +4,7 @@ Flask web application that allows users to upload a CSV file and display its con
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
-[![CI](https://github.com/tu-usuario/flask-csv-viewer/actions/workflows/ci.yml/badge.svg)](https://github.com/tu-usuario/flask-csv-viewer/actions/workflows/ci.yml)
+[![CI](https://github.com/bi0punk/flask-csv-viewer/actions/workflows/ci.yml/badge.svg)](https://github.com/bi0punk/flask-csv-viewer/actions/workflows/ci.yml)
 
 ## Tabla de Contenidos
 
@@ -53,7 +53,7 @@ flask-csv-viewer/
 ## Instalación
 
 ```bash
-git clone https://github.com/tu-usuario/flask-csv-viewer.git
+git clone https://github.com/bi0punk/flask-csv-viewer.git
 cd flask-csv-viewer
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
