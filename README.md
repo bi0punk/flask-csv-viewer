@@ -1,24 +1,24 @@
 # flask-csv-viewer
 
-Flask web application that allows users to upload a CSV file and display its contents as an interactive HTML table using Pandas and DataTables.
+Aplicación web Flask que permite subir un archivo CSV y visualizar su contenido como una tabla HTML interactiva usando Pandas y DataTables.
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-3.0%2B-000000?logo=flask)](https://flask.palletsprojects.com/)
 [![CI](https://github.com/bi0punk/flask-csv-viewer/actions/workflows/ci.yml/badge.svg)](https://github.com/bi0punk/flask-csv-viewer/actions/workflows/ci.yml)
+[![Licencia](https://img.shields.io/badge/Licencia-MIT-blue)](LICENSE)
 
-## Tabla de Contenidos
+## Contenido
 
 - [Características](#características)
-- [Stack](#stack)
 - [Arquitectura](#arquitectura)
-- [Requisitos](#requisitos)
+- [Stack](#stack)
+- [Estructura del repositorio](#estructura-del-repositorio)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Tests](#tests)
 - [Configuración](#configuración)
-- [CI](#ci)
 - [Seguridad](#seguridad)
-- [Limitaciones / Roadmap](#limitaciones--roadmap)
+- [Tests / CI](#tests--ci)
+- [Roadmap](#roadmap)
 - [Licencia](#licencia)
 
 ## Características
@@ -28,29 +28,46 @@ Flask web application that allows users to upload a CSV file and display its con
 - Escapado de celdas via `pandas.to_html(escape=True)` contra XSS
 - Límite de subida configurable (16 MB por defecto)
 
+## Arquitectura
+
+```mermaid
+flowchart TD
+  USR[Usuario] -->|sube archivo .csv| FLASK[Flask app.py :5000]
+  FLASK -->|pandas.read_csv| DF[DataFrame pandas]
+  DF -->|df.to_html escape=True| HTML[Markup HTML]
+  HTML -->|render_template| NAV[Navegador]
+  NAV -->|jQuery DataTables| TABLE[Tabla interactiva: búsqueda/orden/paginación]
+```
+
 ## Stack
 
-- Python 3.11+, Flask, Pandas, DataTables (jQuery)
+| Componente | Tecnología |
+|---|---|
+| Backend | Python 3.11+, Flask 3.0+ |
+| Parseo CSV | Pandas 2.0+ |
+| Frontend | HTML5 + jQuery DataTables + Bootstrap |
+| Testing | pytest + ruff |
 
-## Arquitectura
+## Estructura del repositorio
 
 ```
 flask-csv-viewer/
-├── app.py
+├── app.py                  # Aplicación Flask principal
 ├── templates/
-│   └── index.html
-├── data/               # CSVs de ejemplo
+│   └── index.html          # Vista con DataTables
+├── data/                   # CSVs de ejemplo
+│   └── employees.csv
 ├── tests/
 ├── requirements.txt
 ├── pyproject.toml
-└── .env.example
+├── .env.example
+├── .github/workflows/ci.yml
+└── README.md
 ```
 
-## Requisitos
-
-- Python 3.11+
-
 ## Instalación
+
+Requisitos: Python 3.11+.
 
 ```bash
 git clone https://github.com/bi0punk/flask-csv-viewer.git
@@ -67,7 +84,22 @@ python app.py
 
 Abrir `http://localhost:5000`, seleccionar un archivo CSV y visualizarlo como tabla interactiva con búsqueda, ordenamiento y paginación.
 
-## Tests
+## Configuración
+
+| Variable | Default | Descripción |
+|---|---|---|
+| `MAX_CONTENT_LENGTH` | 16 MB | Tamaño máximo de subida |
+| `FLASK_SECRET` | secreto aleatorio | Clave de sesión de Flask |
+
+## Seguridad
+
+- Los valores de las celdas CSV son escapados por pandas `to_html(escape=True)` antes de renderizar
+- Tamaño de subida limitado a 16 MB
+- Validación de tipo de archivo (solo extensión `.csv`) y de contenido por el parser de pandas
+
+## Tests / CI
+
+CI: GitHub Actions ejecuta ruff lint + pytest en cada push y PR.
 
 ```bash
 pip install pytest ruff
@@ -75,24 +107,9 @@ pytest -q
 ruff check .
 ```
 
-## Configuración
+## Roadmap
 
-| Variable              | Default | Descripción                     |
-|-----------------------|---------|---------------------------------|
-| `MAX_CONTENT_LENGTH`  | 16 MB   | Tamaño máximo de subida         |
-
-## CI
-
-GitHub Actions ejecuta ruff lint + pytest en cada push y PR.
-
-## Seguridad
-
-- Los valores de las celdas CSV son escapados por pandas `to_html(escape=True)` antes de renderizar
-- Tamaño de subida limitado a 16 MB
-- Validación de tipo de archivo por el parser de pandas
-
-## Limitaciones / Roadmap
-
+- [x] Visor CSV con DataTables
 - [ ] Soporte para archivos Excel (.xlsx)
 - [ ] Exportación a PDF/JSON desde la tabla
 - [ ] Filtros avanzados y gráficos integrados
@@ -100,4 +117,4 @@ GitHub Actions ejecuta ruff lint + pytest en cada push y PR.
 
 ## Licencia
 
-MIT
+MIT — ver [LICENSE](LICENSE).
